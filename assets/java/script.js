@@ -16,32 +16,43 @@ var randomNumber = function(min, max) {
   return value;
 };
 
-// Assignment code here
+// Function to generate password
 function generatePassword() {
-  // Get desired password length
+  // Gets desired password length
   var passwordLength = prompt("How many characters would you like your password to be? \nThe minimum number is 8 and the maximum is 128.");
   var passwordLength = Number(passwordLength);
   console.log("Your password length is " + passwordLength);
 
-  // Check if user entered a valid number for password length
-  if (isNaN (passwordLength)) {
-    alert("ERROR \nPlease enter a number.");
-    generatePassword();
-  } 
-  else if (passwordLength < 8) {
-    alert("ERROR \nThe minimum length is 8 characters.");
-    generatePassword();
-  } 
-  else if (passwordLength > 128) {
-    alert("ERROR \nThe maximum length is 128 characters.");
-    generatePassword();
+  // Checks if user entered a valid number for password length
+  while (isNaN (passwordLength) || passwordLength < 8 || passwordLength > 128) {
+    if (isNaN (passwordLength)) {
+      alert("ERROR \nPlease enter a number.");
+      var passwordLength = prompt("How many characters would you like your password to be? \nThe minimum number is 8 and the maximum is 128.");
+      var passwordLength = Number(passwordLength);
+    } 
+    else if (passwordLength < 8) {
+      alert("ERROR \nThe minimum length is 8 characters.");
+      var passwordLength = prompt("How many characters would you like your password to be? \nThe minimum number is 8 and the maximum is 128.");
+      var passwordLength = Number(passwordLength);
+    } 
+    else if (passwordLength > 128) {
+      alert("ERROR \nThe maximum length is 128 characters.");
+      var passwordLength = prompt("How many characters would you like your password to be? \nThe minimum number is 8 and the maximum is 128.");
+      var passwordLength = Number(passwordLength);
+    }
   }
 
+  // Ensures user selects at least one character type for password
   while (!uppercaseConfirm && !lowercaseConfirm && !numericConfirm && !specialConfirm){
     var uppercaseConfirm = confirm("Do you want to include uppercase letters in your password?");
+    console.log("Include uppercase letters: " + uppercaseConfirm);
     var lowercaseConfirm = confirm("Do you want to include lowercase letters in your password?");
+    console.log("Include lowercase letters: " + lowercaseConfirm);
     var numericConfirm = confirm("Do you want to include numeric characters in your password?");
+    console.log("Include numeric characters: " + numericConfirm);
     var specialConfirm = confirm("Do you want to include special characters in your password?");
+    console.log("Include special characters: " + specialConfirm);
+    
     
     if (!uppercaseConfirm && !lowercaseConfirm && !numericConfirm && !specialConfirm){
       alert("ERROR \nYou must include at least one character type in your password");
@@ -65,16 +76,16 @@ function generatePassword() {
 
   // Randomly selects a character from password bank and creates password of the desired length
   var i;
-  var password = "";
+  var randomPassword = "";
   for (i = 0; i < passwordLength; i++) {
-    password = password + passwordBank[randomNumber(0, passwordBank.length)];
+    randomPassword = randomPassword + passwordBank[randomNumber(0, passwordBank.length)];
   }
 
   console.log(passwordBank);
-  console.log(password);
+  console.log(randomPassword);
 
 
-  return password;
+  return randomPassword;
 }
 
 // Get references to the #generate element
