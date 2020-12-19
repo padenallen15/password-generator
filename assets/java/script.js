@@ -9,6 +9,13 @@ var specialCharacters = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", 
 
 var passwordBank = [];
 
+// function to generate a random numeric value
+var randomNumber = function(min, max) {
+  var value = Math.floor(Math.random() * (max - min) + min);
+
+  return value;
+};
+
 // Assignment code here
 function generatePassword() {
   // Get desired password length
@@ -55,13 +62,19 @@ function generatePassword() {
     passwordBank = passwordBank.concat(specialCharacters);
   }
 
-  var characterCounter = passwordBank.length;
 
-  console.log("The number of characters in password bank are " + characterCounter);
+  // Randomly selects a character from password bank and creates password of the desired length
+  var i;
+  var password = "";
+  for (i = 0; i < passwordLength; i++) {
+    password = password + passwordBank[randomNumber(0, passwordBank.length)];
+  }
+
   console.log(passwordBank);
+  console.log(password);
 
-  
-  return passwordLength;
+
+  return password;
 }
 
 // Get references to the #generate element
