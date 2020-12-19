@@ -7,6 +7,8 @@ var numericElements = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
 var specialCharacters = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "=", "+", "[", "{", "]", "}", "|", "?", "/", ",", "<", ".", ">", "`", "~"];
 
+var passwordBank = [];
+
 // Assignment code here
 function generatePassword() {
   // Get desired password length
@@ -18,22 +20,46 @@ function generatePassword() {
   if (isNaN (passwordLength)) {
     alert("ERROR \nPlease enter a number.");
     generatePassword();
-  } else if (passwordLength < 8) {
+  } 
+  else if (passwordLength < 8) {
     alert("ERROR \nThe minimum length is 8 characters.");
     generatePassword();
-  } else if (passwordLength > 128) {
+  } 
+  else if (passwordLength > 128) {
     alert("ERROR \nThe maximum length is 128 characters.");
     generatePassword();
   }
 
-  var lowercaseConfirm = confirm("Do you want to include lowercase letters in your password?");
   var uppercaseConfirm = confirm("Do you want to include uppercase letters in your password?");
+  var lowercaseConfirm = confirm("Do you want to include lowercase letters in your password?");
   var numericConfirm = confirm("Do you want to include numeric characters in your password?");
   var specialConfirm = confirm("Do you want to include special characters in your password?");
 
+  while (!uppercaseConfirm && !lowercaseConfirm && !numericConfirm && !specialConfirm){
+    var uppercaseConfirm = confirm("Do you want to include uppercase letters in your password?");
+    var lowercaseConfirm = confirm("Do you want to include lowercase letters in your password?");
+    var numericConfirm = confirm("Do you want to include numeric characters in your password?");
+    var specialConfirm = confirm("Do you want to include special characters in your password?");
+    
+    if (!uppercaseConfirm && !lowercaseConfirm && !numericConfirm && !specialConfirm){
+      alert("You must include at least one of the character types in your password");
+    }
+  }
 
+  if (uppercaseConfirm) {
+    passwordBank = passwordBank.concat(uppercaseLetters);
+  }
+  if(lowercaseConfirm) {
+    passwordBank = passwordBank.concat(lowercaseLetters);
+  }
+  if(numericConfirm) {
+    passwordBank = passwordBank.concat(numericElements);
+  }
+  if(specialConfirm) {
+    passwordBank = passwordBank.concat(specialCharacters);
+  }
 
-
+  console.log(passwordBank);
 
   return passwordLength;
 }
