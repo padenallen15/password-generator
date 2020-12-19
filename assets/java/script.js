@@ -30,11 +30,6 @@ function generatePassword() {
     generatePassword();
   }
 
-  var uppercaseConfirm = confirm("Do you want to include uppercase letters in your password?");
-  var lowercaseConfirm = confirm("Do you want to include lowercase letters in your password?");
-  var numericConfirm = confirm("Do you want to include numeric characters in your password?");
-  var specialConfirm = confirm("Do you want to include special characters in your password?");
-
   while (!uppercaseConfirm && !lowercaseConfirm && !numericConfirm && !specialConfirm){
     var uppercaseConfirm = confirm("Do you want to include uppercase letters in your password?");
     var lowercaseConfirm = confirm("Do you want to include lowercase letters in your password?");
@@ -42,10 +37,11 @@ function generatePassword() {
     var specialConfirm = confirm("Do you want to include special characters in your password?");
     
     if (!uppercaseConfirm && !lowercaseConfirm && !numericConfirm && !specialConfirm){
-      alert("You must include at least one of the character types in your password");
+      alert("ERROR \nYou must include at least one character type in your password");
     }
   }
 
+  // Adding characters to password bank depending on user feedback
   if (uppercaseConfirm) {
     passwordBank = passwordBank.concat(uppercaseLetters);
   }
@@ -59,8 +55,12 @@ function generatePassword() {
     passwordBank = passwordBank.concat(specialCharacters);
   }
 
+  var characterCounter = passwordBank.length;
+
+  console.log("The number of characters in password bank are " + characterCounter);
   console.log(passwordBank);
 
+  
   return passwordLength;
 }
 
